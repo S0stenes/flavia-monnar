@@ -270,14 +270,6 @@ em { font-family: var(--serif); font-style: italic; font-weight: 400; }
 .hero__aside p { font-size: 1rem; line-height: 1.55; color: rgba(243, 237, 228, 0.82); margin-bottom: 1.6rem; }
 .hero__ctas { display: flex; flex-direction: column; align-items: flex-start; gap: 1.2rem; }
 
-.hero__scroll {
-  position: absolute; left: 50%; bottom: clamp(1.2rem, 3vh, 2rem); transform: translateX(-50%);
-  display: flex; flex-direction: column; align-items: center; gap: 0.5rem;
-  font-size: 0.62rem; letter-spacing: 0.3em; text-transform: uppercase; color: rgba(243, 237, 228, 0.7);
-}
-.hero__scroll i { width: 1px; height: 38px; background: rgba(243, 237, 228, 0.25); position: relative; overflow: hidden; }
-.hero__scroll i::after { content: ''; position: absolute; inset: 0; background: var(--gold-hi); animation: drip 2s var(--ease) infinite; }
-@keyframes drip { 0% { transform: translateY(-100%); } 100% { transform: translateY(100%); } }
 
 .hero__after {
   position: absolute; inset: 0; display: flex; justify-content: space-between; align-items: center;
@@ -300,12 +292,39 @@ em { font-family: var(--serif); font-style: italic; font-weight: 400; }
   .hero__ctas { flex-direction: row; flex-wrap: wrap; align-items: center; }
   .hero__aside p { font-size: 0.92rem; margin-bottom: 1.2rem; }
   .vf__read { display: none; }
-  .hero__scroll { display: none; }
-  .hero__after { flex-direction: column; justify-content: space-between; padding-block: 5.5rem 1.8rem; text-align: center; }
+}
+
+/* Hero empilhado (celular / tablet em pé): textos acima e abaixo do arco */
+@media (max-width: 599px), (max-width: 900px) and (orientation: portrait) {
+  .hero__after { flex-direction: column; justify-content: space-between; padding-block: 5.2rem 1.6rem; text-align: center; }
   .hero__after-l, .hero__after-r { width: 100%; text-align: center; }
-  .hero__big { font-size: 4.2rem; display: inline; }
-  .hero__big-cap { display: block; }
-  .hero__after-r p { font-size: 1.25rem; }
+  .hero__after-l { display: flex; flex-direction: column; align-items: center; gap: 0.15rem; }
+  .hero__big { display: block; font-size: clamp(3.4rem, 15vw, 5rem); line-height: 0.95; }
+  .hero__big-cap { display: block; font-size: 0.88rem; }
+  .hero__after-r p { font-size: clamp(1.1rem, 4.6vw, 1.4rem); max-width: 26ch; margin: 0.5rem auto 0; }
+}
+
+/* Celular deitado / telas baixas */
+@media (orientation: landscape) and (max-height: 560px) {
+  .hero__content { grid-template-columns: 1fr minmax(210px, 290px); gap: 1.4rem; padding: 0 var(--gutter) 1.2rem; }
+  .hero__title { font-size: min(8.5vw, 17vh); }
+  .hero__line--it { padding-left: 0.4em; white-space: nowrap; }
+  .hero__eyebrow { margin-bottom: -0.6rem; font-size: 0.6rem; }
+  .hero__aside p { font-size: 0.8rem; margin-bottom: 0.7rem; }
+  .hero__ctas { flex-direction: column; align-items: flex-start; gap: 0.5rem; }
+  .hero__ctas .btn { padding: 0.75rem 1.1rem; font-size: 0.75rem; }
+  .play__ring { width: 40px; height: 40px; }
+  .viewfinder { display: none; }
+  .hero__big { font-size: min(11vw, 26vh); }
+  .hero__after { padding-top: 3.5rem; }
+  .services__pin { padding-top: 4.5rem; }
+}
+
+/* Alvos de toque confortáveis */
+@media (pointer: coarse) {
+  .sound { min-height: 44px; min-width: 44px; justify-content: center; }
+  .swatch__link { padding-block: 0.8rem; }
+  .footer__links a { display: inline-block; padding-block: 0.35rem; }
 }
 
 /* ═══════════ MANIFESTO ═══════════ */
@@ -337,7 +356,7 @@ em { font-family: var(--serif); font-style: italic; font-weight: 400; }
 .badge { position: absolute; z-index: 2; right: -40px; bottom: 12%; width: 150px; height: 150px; border-radius: 50%; background: var(--espresso); color: var(--ivory); display: grid; place-items: center; }
 .badge svg { position: absolute; inset: 0; width: 100%; height: 100%; animation: spin 18s linear infinite; }
 .badge text { font-size: 13.5px; letter-spacing: 3.2px; text-transform: uppercase; fill: var(--gold-hi); font-family: var(--sans); font-weight: 600; }
-.badge em { font-size: 2.4rem; color: var(--ivory); line-height: 1; }
+.badge__dot { width: 12px; height: 12px; border-radius: 50%; background: var(--gold-hi); box-shadow: 0 0 0 10px rgba(230, 204, 152, 0.12), 0 0 0 22px rgba(230, 204, 152, 0.06); }
 @keyframes spin { to { transform: rotate(360deg); } }
 
 .about__name { font-family: var(--serif); font-weight: 400; font-size: clamp(3.4rem, 8vw, 8.4rem); line-height: 0.9; letter-spacing: -0.03em; color: var(--espresso); }

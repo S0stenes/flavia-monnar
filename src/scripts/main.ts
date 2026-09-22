@@ -143,7 +143,7 @@ function intro(): Promise<void> {
     const heroChars = heroSplit.flatMap((s) => s.chars);
 
     gsap.set(heroChars, { yPercent: 115 });
-    gsap.set(['.hero__eyebrow', '.hero__aside', '.hero__scroll', '.nav'], { autoAlpha: 0 });
+    gsap.set(['.hero__eyebrow', '.hero__aside', '.nav'], { autoAlpha: 0 });
     gsap.set('.vf', { scale: 2.2, autoAlpha: 0 });
     gsap.set(['.vf__read', '.vf__focus'], { autoAlpha: 0 });
 
@@ -167,7 +167,7 @@ function intro(): Promise<void> {
       .to('.vf__focus', { autoAlpha: 0, duration: 0.6 }, '<1.3')
       .to('.vf', { scale: 1, autoAlpha: 1, duration: 1.4, stagger: 0.05 }, '<-1.2')
       .to(heroChars, { yPercent: 0, duration: 1.4, stagger: 0.025 }, '<0.1')
-      .to(['.hero__eyebrow', '.hero__aside', '.nav', '.vf__read', '.hero__scroll'], { autoAlpha: 1, duration: 1, stagger: 0.1, ease: 'power2.out' }, '<0.5')
+      .to(['.hero__eyebrow', '.hero__aside', '.nav', '.vf__read'], { autoAlpha: 1, duration: 1, stagger: 0.1, ease: 'power2.out' }, '<0.5')
       .add(() => {
         document.body.classList.remove('is-loading');
         lenis.start();
@@ -181,16 +181,24 @@ function scenes() {
   const mm = gsap.matchMedia();
 
   // HERO → janela em arco
-  mm.add({ desktop: '(min-width: 901px)', mobile: '(max-width: 900px)' }, (ctx) => {
+  // lado a lado: desktop e celular deitado · empilhado: celular/tablet em pé
+  mm.add({ desktop: '(min-width: 901px), (orientation: landscape) and (min-width: 600px)', mobile: '(max-width: 599px), (max-width: 900px) and (orientation: portrait)' }, (ctx) => {
     const d = ctx.conditions!.desktop;
+    const stage = $('.hero__stage');
+    const afterL = $('.hero__after-l');
+    const afterR = $('.hero__after-r');
     const insetTo = () => {
-      const w = innerWidth, h = innerHeight;
+      const w = stage.clientWidth, h = stage.clientHeight;
       if (d) {
         const x = w * 0.31, y = h * 0.12;
         const r = (w - 2 * x) / 2;
         return `inset(${y}px ${x}px ${y}px ${x}px round ${r}px ${r}px 24px 24px)`;
       }
-      const x = w * 0.08, top = h * 0.24, bottom = h * 0.22;
+      // mede os textos reais para o arco nunca cobrir nenhum deles
+      const gap = 18;
+      const x = w * 0.08;
+      const top = afterL.offsetTop + afterL.offsetHeight + gap;
+      const bottom = h - afterR.offsetTop + gap;
       const r = (w - 2 * x) / 2;
       return `inset(${top}px ${x}px ${bottom}px ${x}px round ${r}px ${r}px 20px 20px)`;
     };
@@ -200,7 +208,7 @@ function scenes() {
       defaults: { ease: 'none' },
     });
     tl.to('.hero__content', { yPercent: -35, autoAlpha: 0, duration: 0.35 }, 0)
-      .to(['.viewfinder', '.hero__scroll'], { autoAlpha: 0, duration: 0.2 }, 0)
+      .to('.viewfinder', { autoAlpha: 0, duration: 0.2 }, 0)
       .fromTo('.hero__media', { clipPath: () => `inset(0px 0px 0px 0px round 0px 0px 0px 0px)` }, { clipPath: insetTo, duration: 1, ease: 'power2.inOut' }, 0)
       .fromTo(heroVideo, { scale: 1.04 }, { scale: 1.3, duration: 1, immediateRender: false }, 0)
       .to('.hero__shade', { opacity: 0.35, duration: 1 }, 0)
