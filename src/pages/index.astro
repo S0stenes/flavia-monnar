@@ -3,7 +3,7 @@ import Base from '../layouts/Base.astro';
 import { links, services } from '../config';
 
 const manifesto =
-  'Uma marca forte não nasce do acaso. Ela é construída com [clareza], [posicionamento] e intenção — até que as pessoas percebam o seu [valor] antes mesmo de você dizer uma palavra.';
+  'Uma marca forte não nasce do acaso. Ela é construída com [clareza], [posicionamento] e intenção até que as pessoas percebam o seu [valor] antes mesmo de você dizer uma palavra.';
 const manifestoWords = manifesto.split(' ').map((w) => {
   const accent = w.startsWith('[');
   return { text: w.replace(/[\[\]]/g, ''), accent };
@@ -210,7 +210,7 @@ const manifestoWords = manifesto.split(' ').map((w) => {
         <video src="/video/hero.mp4" poster="/video/poster.jpg" muted loop playsinline preload="none" class="stage__video"></video>
         <div class="stage__cap">
           <span class="eyebrow">(04) Em cena</span>
-          <p>Conteúdos sobre branding, posicionamento e construção de marcas — levados ao palco para empresas e comunidades.</p>
+          <p>Conteúdos sobre branding, posicionamento e construção de marcas levados ao palco para empresas e comunidades.</p>
           <span class="play play--sm"><span class="play__ring"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z" fill="currentColor"/></svg></span><span>Ver o filme com som</span></span>
         </div>
       </div>
@@ -229,7 +229,7 @@ const manifestoWords = manifesto.split(' ').map((w) => {
           <span class="pt pt--3">Foco</span>
         </h2>
         <div class="podcast__foot">
-          <p data-reveal>Um espaço para falar de branding, posicionamento e construção de marcas — com a clareza de quem vive isso todos os dias.</p>
+          <p data-reveal>Um espaço para falar de branding, posicionamento e construção de marcas com a clareza de quem vive isso todos os dias.</p>
           <a href={links.podcast} target="_blank" rel="noopener" class="btn btn--light" data-magnetic><span>Ouvir o Marca em Foco</span><i class="btn__arrow">→</i></a>
         </div>
       </div>
@@ -248,7 +248,7 @@ const manifestoWords = manifesto.split(' ').map((w) => {
           <article class="aud" data-reveal>
             <span class="aud__n">B</span>
             <h3>Marcas <em>pessoais</em></h3>
-            <p>Profissionais que querem construir autoridade e ser reconhecidos pela expertise que têm — com intenção e consistência.</p>
+            <p>Profissionais que querem construir autoridade e ser reconhecidos pela expertise que têm com intenção e consistência.</p>
           </article>
         </div>
       </div>
